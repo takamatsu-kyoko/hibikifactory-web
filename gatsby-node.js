@@ -24,11 +24,15 @@ exports.createPages = async ({ graphql, actions, reporter}) => {
     const { createPage } = actions
 
     const blogresult = await graphql(`
-query MyQuery {
+query {
   allMdx(
     filter: {
-      fields: {fileSourceInstanceName: {eq: "blog"}},
-      frontmatter: { status: {nin: ["draft"]}}
+      fields: {
+        fileSourceInstanceName: {eq: "blog"}
+      },
+      frontmatter: {
+        status: {nin: ["draft"]}
+      }
     }
     sort: {fields: frontmatter___published_on, order: ASC}
   ) {
