@@ -2,14 +2,14 @@ import React from "react"
 
 import BlogCard from "./blog_card"
 
-export default function BlogGrid() {
+export default function BlogGrid({ blog_posts }) {
     return (
-        <section>
-            <h2>Blog Grid</h2>
-            <BlogCard blog="blog card item 1" />
-            <BlogCard blog="blog card item 2" />
-            <BlogCard blog="blog card item 3" />
-            <BlogCard blog="blog card item 4" />
-        </section>
+        <div>
+            {
+                blog_posts.map(blog => (
+                    <BlogCard blog = { blog.node } key = { blog.node.id }/>
+                ))
+            }
+        </div>
     )
 }
