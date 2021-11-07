@@ -5,6 +5,15 @@
  */
 
 module.exports = {
-  /* Your site config here */
-  plugins: [],
+    plugins: [
+        {
+            resolve: "gatsby-source-filesystem",
+            options: {
+                name: `blog`,
+                path: `${__dirname}/src/contents/blog`,
+                ignore: ['**/template'],
+            }
+        },
+        "gatsby-plugin-mdx"
+    ],
 }
