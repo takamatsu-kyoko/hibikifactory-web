@@ -23,7 +23,7 @@ query {
       },
       frontmatter: {status: {nin: ["draft"]}}
     }
-    sort: {fields: frontmatter___published_on, order: ASC}
+    sort: {fields: frontmatter___published_on, order: DESC}
   ) {
     edges {
       node {
