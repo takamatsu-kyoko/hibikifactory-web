@@ -17,6 +17,11 @@ exports.onCreateNode = ({ node, actions, getNode}) => {
             name: 'fileName',
             value: parent.name
         })
+        createNodeField({
+            node,
+            name: 'fileRelativeDirectory',
+            value: parent.relativeDirectory
+        })
     }
 }
 
@@ -25,10 +30,11 @@ exports.createPages = async ({ graphql, actions, reporter}) => {
 
     const blogresult = await graphql(`
 query {
-  allMdx(
+  titles: allMdx(
     filter: {
       fields: {
-        fileSourceInstanceName: {eq: "blog"}
+        fileSourceInstanceName: {eq: "blog"},
+        fileName: {eq: "index"}
       },
       frontmatter: {
         status: {nin: ["draft"]}
@@ -38,8 +44,48 @@ query {
   ) {
     edges {
       node {
-        id
+        fields {
+          fileRelativeDirectory
+        }
         slug
+        frontmatter {
+          title
+          categories
+          status
+          published_on(formatString: "YYYY-MM-DD")
+          updated_on(formatString: "YYYY-MM-DD")
+        }
+      }
+      next {
+        slug
+        frontmatter {
+          title
+        }
+      }
+      previous {
+        slug
+        frontmatter {
+          title
+        }
+      }
+    }
+  }
+  pages: allMdx(
+    filter: {
+      fields: {
+        fileSourceInstanceName: {eq: "blog"}},
+        frontmatter: {status: {nin: ["draft"]}
+      }
+    }
+    sort: {fields: slug, order: ASC}
+  ) {
+    group(field: fields___fileRelativeDirectory) {
+      fieldValue
+      edges {
+        node {
+          id
+          slug
+        }
       }
     }
   }
@@ -50,13 +96,28 @@ query {
         return
     }
 
-    blogresult.data.allMdx.edges.forEach(({ node }) => {
-        createPage({
-            path: `/blog/post/${node.slug}`,
-            component: path.resolve('./src/templates/blog-post.js'),
-            context: {
-                id: node.id,
-            },
+    const posts = blogresult.data.titles.edges
+    const page_group = blogresult.data.pages.group
+
+    posts.forEach((post) => {
+        const post_pages = page_group.find(group => group.fieldValue === post.node.fields.fileRelativeDirectory)
+
+        post_pages.edges.forEach((page, i) => {
+            createPage({
+                path: `/blog/post/${page.node.slug}`,
+                component: path.resolve('./src/templates/blog-post.js'),
+                context: {
+                    id: page.node.id,
+                    postFrontmatter: post.node.frontmatter,
+                    pagePos: {
+                        currentPage: i + 1,
+                        totalPages: post_pages.edges.length,
+                        firstPageSlug: post.node.slug,
+                    },
+                    previous: post.next, // ソート順が DESC のため previousとnextを逆にする
+                    next: post.previous,
+                },
+            })
         })
     })
 }
