@@ -4,8 +4,8 @@ export default function Hero() {
     return (
         <aside>
             <section>
-                <h2>hero</h2>
-                <div>hero</div>
+                <h1>Hibiki Factory</h1>
+                <div>響製作所</div>
             </section>
         </aside>
     )

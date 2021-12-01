@@ -6,7 +6,7 @@ import ChangeList from '../components/change_list'
 export default function ChangeLog() {
     return (
         <BaseLayout>
-            <h1>Change log</h1>
+            <h1>更新履歴</h1>
             <ChangeList/>
         </BaseLayout>
     )

@@ -5,7 +5,7 @@ import MainMenu from './main_menu'
 export default function Header() {
     return (
         <header>
-            <h1>Logo</h1>
+            <span>Hibiki Factory</span>
             <MainMenu />
         </header>
     )

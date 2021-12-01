@@ -33,7 +33,7 @@ query {
 `)
     return (
         <section>
-            <h2>Blog List</h2>
+            <h2>カテゴリ</h2>
             {
                 data.allMdx.group.map(category => (
                     <section key={ category.fieldValue }>

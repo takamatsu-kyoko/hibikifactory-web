@@ -10,7 +10,7 @@ export default function Home({data}) {
         <HomeLayout>
             <WhatsNew />
             <section>
-                <h2>Blog Grid</h2>
+                <h2>最新の投稿</h2>
                 <BlogGrid blog_posts={ data.recent_posts.edges }/>
             </section>
         </HomeLayout>

@@ -7,7 +7,7 @@ import BlogGrid from '../../components/blog_grid'
 export default function BlogIndex({ data }) {
     return (
         <BaseLayout>
-            <h1>Blog Index</h1>
+            <h1>投稿一覧</h1>
             <BlogGrid blog_posts={ data.allMdx.edges }/>
         </BaseLayout>
     )
