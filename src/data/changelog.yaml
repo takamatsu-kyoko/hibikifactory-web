@@ -1,0 +1,20 @@
+- 
+  date: 2021-10-26
+  summary: サイトの作成を開始しました
+  description: ''
+  url: https://github.com/takamatsu-kyoko/hibikifactory-web
+  slug: ''
+-
+  date: 2021-11-07
+  summary: 投稿の個別ページを作成できるようになりました
+-
+  date: 2021-11-09
+  summary: 投稿の一覧ページを作成しました
+  slug: /blog/
+- 
+  date: 2021-11-30
+  summary: 複数ページの投稿を作成できるようになりました
+- 
+  date: 2021-12-01
+  summary: 更新履歴のページを作成しました
+  slug: /changelog/

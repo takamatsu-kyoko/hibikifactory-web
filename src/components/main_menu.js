@@ -8,7 +8,7 @@ export default function MainMenu() {
                 <li><Link to={`/`}>Home</Link></li>
                 <li><Link to={`/blog/`}>Blog</Link></li>
                 <li>About</li>
-                <li>Log</li>
+                <li><Link to={`/changelog/`}>Log</Link></li>
             </ul>
         </nav>
     )

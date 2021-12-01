@@ -14,6 +14,15 @@ module.exports = {
                 ignore: ['**/template'],
             }
         },
-        "gatsby-plugin-mdx"
+        {
+            resolve: "gatsby-source-filesystem",
+            options: {
+                name: `data_files`,
+                path: `${__dirname}/src/data`,
+                ignore: ['**/.*'],
+            }
+        },
+        "gatsby-plugin-mdx",
+        "gatsby-transformer-yaml",
     ],
 }
